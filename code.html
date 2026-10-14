@@ -1,0 +1,389 @@
+<!DOCTYPE html><html class="h-full" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Programiz C Online Compiler</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter & JetBrains Mono / Fira Code -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"Fira Code"', 'Consolas', 'Monaco', 'monospace'],
+          },
+          colors: {
+            brand: {
+              blue: '#0056d2',
+              hoverBlue: '#0047b3',
+              dark: '#1e293b',
+              grayIcon: '#64748b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Base & Layout Styles -->
+<style data-purpose="base-layout">
+    body {
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      user-select: none;
+    }
+    .font-code {
+      font-family: 'Fira Code', 'Consolas', monospace;
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+<!-- Code Editor Syntax & Styling -->
+<style data-purpose="code-editor-styles">
+    .code-line {
+      min-height: 24px;
+      line-height: 24px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    .selection-highlight {
+      background-color: #e5e9f8;
+    }
+    .token-preprocessor {
+      color: #0d9488;
+      font-weight: 500;
+    }
+    .token-header {
+      color: #b45309;
+    }
+    .token-keyword {
+      color: #8b5cf6;
+      font-weight: 500;
+    }
+    .token-string {
+      color: #b45309;
+    }
+    .token-fn {
+      color: #2563eb;
+    }
+    .token-number {
+      color: #7c3aed;
+    }
+    .token-op {
+      color: #475569;
+    }
+    .token-type {
+      color: #8b5cf6;
+    }
+    .token-var {
+      color: #334155;
+    }
+  </style>
+</head>
+<body class="h-full flex flex-col bg-white text-slate-800">
+<!-- BEGIN: TopHeader -->
+<header class="h-[74px] border-b border-slate-200 px-4 flex items-center justify-between shrink-0 bg-white z-20" data-purpose="main-header" style="min-height: 84px;">
+<!-- Left: Brand Logo & Subtitle -->
+<div class="flex items-center space-x-3">
+<img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfCvg6B0ou9jzSNV6iRhPrYg3s4nhcqWD89WfquQai1WalhC8npKKN-dpHQb-a9g3xWxtfwt6WVVIjN2pjIgtLRj3ttWZlrM0LMI-Ln6g1G4m61ZvR7VflPgWlkvdbEOyuVwChV3QaJZVQlZmUCgU2ezsSjjmdW4qMdO9PWyUTkFdvqheB5j-7lcNOrLgzKenccEb-qQ4Lk4XRmuitrC4GsxLSyTQaLExQVYa2CqOq4yLMXKrtW_xLyK6wun48YBYALA" alt="Programiz C Online Compiler" class="h-[64px] w-auto object-contain" style="max-height: 64px;">
+</div>
+<!-- Right: Realistic Sponsored Ad Banner as in Reference -->
+
+</header>
+<!-- END: TopHeader -->
+<!-- BEGIN: MainContentWrapper -->
+<div class="flex-1 flex overflow-hidden relative">
+<!-- BEGIN: LeftSidebar (Languages Strip) -->
+<aside class="w-[58px] bg-white border-r border-slate-200 flex flex-col items-center py-2 shrink-0 overflow-y-auto z-10 space-y-1 select-none" data-purpose="language-navigation"><div class="w-full flex justify-center py-1 overflow-y-auto"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLSq-d31DrxqrD_sfzQmzPn7Bg9fm8IU5Dg7sLC5_xRfdc9anKLPLR7NHhQhr7OZShGc7tG64b-9xZZCTTR8kbUE7jGDLeyNzkYM2RVPlS71ppCgGcJJB1iY5UDIPyO_ZDdYCxBVF2cVFtocjW3oFBRbCgztbWL-8XQOwVosjRTRCeQPl8au6JHgLmwLQlNXXnLm3-Uppt8zHjQPGwIO-B5kzyA5tzaexk_TQXXd5GAHaoDkz1LXps34I6LMKOtRzoHw" alt="Language Selector" class="w-full max-w-[58px] h-auto object-contain select-none"></div></aside>
+<!-- END: LeftSidebar -->
+<!-- BEGIN: Workspace Split Container -->
+<main class="flex-1 flex overflow-hidden" id="workspace-container">
+<!-- BEGIN: LeftEditorPane -->
+<section class="w-1/2 flex flex-col bg-white border-r border-slate-200 min-w-[320px] max-w-[85%] select-text" data-purpose="code-editor-panel" id="editor-pane">
+<!-- Tab Bar & Run Action -->
+<div class="h-[46px] border-b border-slate-200 flex items-center justify-between px-3 shrink-0 bg-white" data-purpose="editor-header">
+<!-- Code File Tab -->
+<div class="flex items-center space-x-2">
+<div class="border-b-2 border-transparent px-3 py-1 text-slate-700 font-medium text-[13px] flex items-center space-x-2 bg-slate-50 border border-slate-200 rounded-t-sm">
+<span id="tab-filename" class="">main.c</span>
+</div>
+</div>
+<!-- Run Button -->
+<div>
+<button class="bg-[#0056d2] hover:bg-[#0046b0] active:scale-[0.98] transition-all text-white text-[13px] font-semibold px-5 py-1.5 rounded-md flex items-center space-x-1.5 shadow-sm" id="run-code-btn">
+<span class="">Run</span>
+<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+<polygon points="5 3 19 12 5 21 5 3"></polygon>
+</svg>
+</button>
+</div>
+</div>
+<!-- Code Area -->
+<div class="flex-1 flex font-code text-[14px] leading-6 overflow-auto py-2.5 bg-white" data-purpose="code-area">
+<!-- Line Numbers & Fold Gutter -->
+<div class="w-12 shrink-0 text-slate-400 select-none text-right pr-3 font-code text-[13px] flex flex-col" data-purpose="gutter">
+<div class="code-line justify-end">1</div>
+<div class="code-line justify-end">
+<span class="text-[10px] text-slate-400 mr-1.5 cursor-pointer">˅</span>2
+            </div>
+<div class="code-line justify-end">3</div>
+<div class="code-line justify-end">4</div>
+<div class="code-line justify-end">
+<span class="text-[10px] text-slate-400 mr-1.5 cursor-pointer">˅</span>5
+            </div>
+<div class="code-line justify-end">6</div>
+<div class="code-line justify-end">
+<span class="text-[10px] text-slate-400 mr-1.5 cursor-pointer">˅</span>7
+            </div>
+<div class="code-line justify-end">8</div>
+<div class="code-line justify-end">
+<span class="text-[10px] text-slate-400 mr-1.5 cursor-pointer">˅</span>9
+            </div>
+<div class="code-line justify-end">10</div>
+<div class="code-line justify-end">11</div>
+<div class="code-line justify-end">12</div>
+<div class="code-line justify-end">13</div>
+</div>
+<!-- Code Content Lines with Reference Selection Highlight -->
+<div class="flex-1 flex flex-col relative whitespace-pre pr-6" id="editor-lines-container">
+<!-- Line 1 -->
+<div class="code-line">
+<span class="token-preprocessor">#include</span> <span class="token-header">&lt;stdio.h&gt;</span>
+</div>
+<!-- Line 2 (Highlighted block starts: int main() { ) -->
+<div class="code-line selection-highlight w-full pl-0 rounded-tl-sm">
+<span class="token-type">int</span>&nbsp;<span class="token-fn">main</span>() {
+            </div>
+<!-- Line 3 (Highlighted) -->
+<div class="code-line selection-highlight w-full pl-0">
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="token-type">int</span>&nbsp;<span class="token-var">numbers</span>[<span class="token-number">10</span>];
+            </div>
+<!-- Line 4 (Highlighted) -->
+<div class="code-line selection-highlight w-full pl-0 rounded-bl-sm">
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="token-fn">printf</span>(<span class="token-string">"Enter 10 numbers:\n"</span>);
+            </div>
+<!-- Line 5 -->
+<div class="code-line">
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="token-keyword">for</span>(<span class="token-type">int</span>&nbsp;<span class="token-var">i</span> = <span class="token-number">0</span>; <span class="token-var">i</span> &lt; <span class="token-number">10</span>; <span class="token-var">i</span>++) {
+            </div>
+<!-- Line 6 -->
+<div class="code-line">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-fn">scanf</span>(<span class="token-string">"%d"</span>, &amp;<span class="token-var">numbers</span>[<span class="token-var">i</span>]);
+            </div>
+<!-- Line 7 -->
+<div class="code-line">
+              &nbsp;&nbsp;&nbsp;&nbsp;}
+            </div>
+<!-- Line 8 -->
+<div class="code-line">
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="token-fn">printf</span>(<span class="token-string">"\nThe numbers you entered are:\n"</span>);
+            </div>
+<!-- Line 9 -->
+<div class="code-line">
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="token-keyword">for</span>(<span class="token-type">int</span>&nbsp;<span class="token-var">i</span> = <span class="token-number">0</span>; <span class="token-var">i</span> &lt; <span class="token-number">10</span>; <span class="token-var">i</span>++) {
+            </div>
+<!-- Line 10 -->
+<div class="code-line">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-fn">printf</span>(<span class="token-string">"%d "</span>, <span class="token-var">numbers</span>[<span class="token-var">i</span>]);
+            </div>
+<!-- Line 11 -->
+<div class="code-line">
+              &nbsp;&nbsp;&nbsp;&nbsp;}
+            </div>
+<!-- Line 12 -->
+<div class="code-line">
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="token-keyword">return</span> <span class="token-number">0</span>;
+            </div>
+<!-- Line 13 -->
+<div class="code-line">
+              }
+            </div>
+</div>
+</div>
+</section>
+<!-- END: LeftEditorPane -->
+<!-- BEGIN: ResizableDivider -->
+<div class="w-3 -mx-1.5 z-30 cursor-col-resize flex items-center justify-center group" data-purpose="splitter-divider" id="drag-splitter">
+<!-- Visual Pill Grabber with Dots -->
+<div class="w-3.5 h-10 rounded-full border border-slate-200 bg-white shadow-sm flex flex-col items-center justify-center space-y-0.5 group-hover:border-blue-400 group-hover:shadow transition-colors">
+<span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+<span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+<span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+<span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+<span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+</div>
+</div>
+<!-- END: ResizableDivider -->
+<!-- BEGIN: RightOutputPane -->
+<section class="flex-1 flex flex-col bg-white min-w-[280px]" data-purpose="output-panel" id="output-pane">
+<!-- Output Header -->
+<div class="h-[46px] border-b border-slate-200 flex items-center justify-between px-4 shrink-0 bg-white" data-purpose="output-header">
+<div class="text-[14px] text-slate-700 font-medium">
+            Output
+          </div>
+<!-- Output Utility Actions: Share & Options (with yellow notification dot) -->
+<div class="flex items-center space-x-3 text-slate-500">
+<!-- Share Icon -->
+<button class="hover:text-slate-800 p-1 rounded hover:bg-slate-100 transition" title="Share code">
+<svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24">
+<circle cx="18" cy="5" r="3"></circle>
+<circle cx="6" cy="12" r="3"></circle>
+<circle cx="18" cy="19" r="3"></circle>
+<line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line>
+<line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line>
+</svg>
+</button>
+<!-- 3 Dots More Menu with Yellow Alert Dot -->
+<button class="hover:text-slate-800 p-1 rounded hover:bg-slate-100 transition relative" title="Options">
+<svg class="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
+<circle cx="12" cy="5" r="1.8"></circle>
+<circle cx="12" cy="12" r="1.8"></circle>
+<circle cx="12" cy="19" r="1.8"></circle>
+</svg>
+<!-- Orange/Yellow Notification Indicator dot from screenshot -->
+<span class="absolute top-0.5 right-0.5 w-2 h-2 bg-[#f59e0b] border-2 border-white rounded-full"></span>
+</button>
+</div>
+</div>
+<!-- Terminal Output Screen -->
+<div class="flex-1 p-4 font-code text-[14px] text-slate-800 overflow-auto bg-white select-text" data-purpose="terminal-display" id="terminal-screen">
+<div class="leading-relaxed" id="output-content">
+            Enter 10 numbers:
+          </div>
+<!-- Blinking cursor indicator -->
+<span class="inline-block w-2 h-4 bg-slate-400 ml-1 translate-y-0.5 animate-pulse"></span>
+</div>
+<!-- Input Box for Simulation -->
+
+</section>
+<!-- END: RightOutputPane -->
+</main>
+<!-- END: Workspace Split Container -->
+</div>
+<!-- END: MainContentWrapper -->
+<!-- BEGIN: Logic & Interactivity Scripts -->
+<!-- Splitter Resize Script -->
+<script data-purpose="splitter-resizing">
+    const splitter = document.getElementById('drag-splitter');
+    const editorPane = document.getElementById('editor-pane');
+    const container = document.getElementById('workspace-container');
+    let isDragging = false;
+
+    splitter.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      document.body.style.cursor = 'col-resize';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const containerRect = container.getBoundingClientRect();
+      const newWidth = e.clientX - containerRect.left;
+      const containerWidth = containerRect.width;
+
+      if (newWidth > 260 && newWidth < (containerWidth - 220)) {
+        const percentage = (newWidth / containerWidth) * 100;
+        editorPane.style.width = percentage + '%';
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        document.body.style.cursor = 'default';
+      }
+    });
+  </script>
+<!-- Interactive Language Selector & Execution Simulator -->
+<script data-purpose="compiler-simulation">
+    const runBtn = document.getElementById('run-code-btn');
+    const outputContent = document.getElementById('output-content');
+    const stdinInput = document.getElementById('stdin-input');
+    const sendInputBtn = document.getElementById('send-input-btn');
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const headerLangTitle = document.getElementById('header-lang-title');
+    const tabFilename = document.getElementById('tab-filename');
+
+    const languageNames = {
+      'c': { title: 'C Online Compiler', file: 'main.c' },
+      'python': { title: 'Python Online Compiler', file: 'main.py' },
+      'r': { title: 'R Online Compiler', file: 'main.r' },
+      'sql': { title: 'SQL Online Compiler', file: 'query.sql' },
+      'html': { title: 'HTML/CSS Online Compiler', file: 'index.html' },
+      'java': { title: 'Java Online Compiler', file: 'Main.java' },
+      'kotlin': { title: 'Kotlin Online Compiler', file: 'main.kt' },
+      'cpp': { title: 'C++ Online Compiler', file: 'main.cpp' },
+      'csharp': { title: 'C# Online Compiler', file: 'Main.cs' },
+      'js': { title: 'JavaScript Online Compiler', file: 'main.js' },
+      'ts': { title: 'TypeScript Online Compiler', file: 'main.ts' },
+      'go': { title: 'Go Online Compiler', file: 'main.go' },
+      'rust': { title: 'Rust Online Compiler', file: 'main.rs' }
+    };
+
+    // Tab button selection
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        langButtons.forEach(b => {
+          b.classList.remove('bg-[#0056d2]', 'text-white', 'active');
+          b.classList.add('text-slate-400', 'hover:bg-slate-100');
+        });
+
+        btn.classList.add('bg-[#0056d2]', 'text-white', 'active');
+        btn.classList.remove('text-slate-400', 'hover:bg-slate-100');
+
+        const langKey = btn.getAttribute('data-lang');
+        if (languageNames[langKey]) {
+          headerLangTitle.innerText = languageNames[langKey].title;
+          tabFilename.innerText = languageNames[langKey].file;
+        }
+      });
+    });
+
+    // Run simulation
+    function handleRunSimulation() {
+      outputContent.innerHTML = 'Compiling and executing...<br>';
+      setTimeout(() => {
+        outputContent.innerHTML = 'Enter 10 numbers:<br>';
+      }, 350);
+    }
+
+    runBtn.addEventListener('click', handleRunSimulation);
+
+    // Stdin simulation
+    function submitStdin() {
+      const val = stdinInput.value.trim();
+      if (!val) return;
+      const numbers = val.split(/\s+/).slice(0, 10);
+      outputContent.innerHTML = `Enter 10 numbers:<br>${numbers.join(' ')}<br><br>The numbers you entered are:<br>${numbers.join(' ')} `;
+      stdinInput.value = '';
+    }
+
+    sendInputBtn.addEventListener('click', submitStdin);
+    stdinInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        submitStdin();
+      }
+    });
+  </script>
+<!-- END: Logic & Interactivity Scripts -->
+
+
+
+
+</body></html>

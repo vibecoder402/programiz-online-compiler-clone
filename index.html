@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programiz Online Compiler</title>
+
+  <!-- Google Fonts: Inter for UI & Fira Code for code editor/output -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Devicon Icons CDN for language icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+  <!-- CodeMirror 5 Editor Core CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+
+  <!-- Custom App Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================================================================= -->
+  <!-- 1. TOP HEADER                                                     -->
+  <!-- ================================================================= -->
+  <header class="app-header">
+    <div class="header-left">
+      <!-- Purple 'P' Logo Badge -->
+      <div class="logo-badge" aria-hidden="true">P</div>
+      
+      <!-- Brand Name & Subtitle Stack -->
+      <div class="brand-text-group">
+        <h1 class="brand-title" id="brand-title">Programiz</h1>
+        <span class="brand-subtitle" id="brand-subtitle">Online Compiler</span>
+      </div>
+    </div>
+
+    <!-- Header Right Utility Area -->
+    <div class="header-right">
+      <span class="header-tagline">Fast &bull; Free &bull; Interactive</span>
+    </div>
+  </header>
+
+  <!-- ================================================================= -->
+  <!-- 2. MAIN APPLICATION LAYOUT (Sidebar + Editor + Divider + Output)  -->
+  <!-- ================================================================= -->
+  <div class="app-body">
+    
+    <!-- LEFT SIDEBAR: Vertical list of 13 language buttons -->
+    <aside class="lang-sidebar" id="lang-sidebar" aria-label="Language Selector">
+      <!-- Language buttons are rendered in the exact requested order -->
+      <button class="lang-btn active" data-lang="python" title="Python">
+        <i class="devicon-python-plain"></i>
+        <span class="lang-label">Python</span>
+      </button>
+
+      <button class="lang-btn" data-lang="r" title="R">
+        <i class="devicon-r-plain"></i>
+        <span class="lang-label">R</span>
+      </button>
+
+      <button class="lang-btn" data-lang="sql" title="SQL">
+        <i class="devicon-azuresqldatabase-plain"></i>
+        <span class="lang-label">SQL</span>
+      </button>
+
+      <button class="lang-btn" data-lang="html" title="HTML">
+        <i class="devicon-html5-plain"></i>
+        <span class="lang-label">HTML</span>
+      </button>
+
+      <button class="lang-btn" data-lang="java" title="Java">
+        <i class="devicon-java-plain"></i>
+        <span class="lang-label">Java</span>
+      </button>
+
+      <button class="lang-btn" data-lang="kotlin" title="Kotlin">
+        <i class="devicon-kotlin-plain"></i>
+        <span class="lang-label">Kotlin</span>
+      </button>
+
+      <button class="lang-btn" data-lang="c" title="C">
+        <i class="devicon-c-plain"></i>
+        <span class="lang-label">C</span>
+      </button>
+
+      <button class="lang-btn" data-lang="cpp" title="C++">
+        <i class="devicon-cplusplus-plain"></i>
+        <span class="lang-label">C++</span>
+      </button>
+
+      <button class="lang-btn" data-lang="csharp" title="C#">
+        <i class="devicon-csharp-plain"></i>
+        <span class="lang-label">C#</span>
+      </button>
+
+      <button class="lang-btn" data-lang="javascript" title="JavaScript">
+        <i class="devicon-javascript-plain"></i>
+        <span class="lang-label">JavaScript</span>
+      </button>
+
+      <button class="lang-btn" data-lang="typescript" title="TypeScript">
+        <i class="devicon-typescript-plain"></i>
+        <span class="lang-label">TypeScript</span>
+      </button>
+
+      <button class="lang-btn" data-lang="go" title="Go">
+        <i class="devicon-go-plain"></i>
+        <span class="lang-label">Go</span>
+      </button>
+
+      <button class="lang-btn" data-lang="rust" title="Rust">
+        <i class="devicon-rust-plain"></i>
+        <span class="lang-label">Rust</span>
+      </button>
+    </aside>
+
+    <!-- WORKSPACE SPLIT CONTAINER (Editor Pane, Divider, Output Pane) -->
+    <main class="workspace-container" id="workspace-container">
+      
+      <!-- ============================================================= -->
+      <!-- 3. MIDDLE PANEL: CODE EDITOR PANE                             -->
+      <!-- ============================================================= -->
+      <section class="editor-pane" id="editor-pane" aria-label="Code Editor">
+        
+        <!-- Tab Bar with File Name and Run Button -->
+        <div class="panel-header editor-header">
+          <div class="tab-item active-tab">
+            <!-- File icon SVG -->
+            <svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            <span id="tab-filename">main.py</span>
+          </div>
+
+          <!-- Run Button -->
+          <button class="run-button" id="run-btn" title="Run code (Ctrl+Enter)">
+            <span>Run</span>
+            <svg class="run-icon" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="6 4 20 12 6 20 6 4"></polygon>
+            </svg>
+          </button>
+        </div>
+
+        <!-- CodeMirror Editor Mount Point -->
+        <div class="editor-wrapper" id="editor-wrapper">
+          <textarea id="code-editor" aria-label="Code text editor"></textarea>
+        </div>
+      </section>
+
+      <!-- ============================================================= -->
+      <!-- 6. DRAGGABLE VERTICAL DIVIDER                                 -->
+      <!-- ============================================================= -->
+      <div class="divider" id="drag-splitter" role="separator" aria-orientation="vertical" tabindex="0" title="Drag to resize panels">
+        <div class="divider-handle"></div>
+      </div>
+
+      <!-- ============================================================= -->
+      <!-- 5. RIGHT PANEL: OUTPUT PANE                                   -->
+      <!-- ============================================================= -->
+      <section class="output-pane" id="output-pane" aria-label="Output Console">
+        
+        <!-- Output Header with Share and Menu Icons -->
+        <div class="panel-header output-header">
+          <div class="output-title">Output</div>
+          
+          <div class="output-actions">
+            <!-- Share Icon Button -->
+            <button class="icon-action-btn" id="share-btn" title="Share code" aria-label="Share code">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+              </svg>
+            </button>
+
+            <!-- Three-Dot Menu Icon Button with Yellow/Orange Alert Dot -->
+            <button class="icon-action-btn has-notification" id="more-btn" title="More options" aria-label="More options">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="5" r="2"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+                <circle cx="12" cy="19" r="2"></circle>
+              </svg>
+              <span class="notification-dot" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Output Terminal / Display Area -->
+        <div class="output-content" id="output-content">
+          <!-- Initial blank state or helper text -->
+          <div class="output-placeholder">Press <kbd>Run ▶</kbd> to execute the program.</div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast notification element for user feedback (e.g. sharing) -->
+  <div class="toast-notice" id="toast-notice"></div>
+
+  <!-- ================================================================= -->
+  <!-- CODEMIRROR 5 SCRIPTS & LANGUAGE MODES                             -->
+  <!-- ================================================================= -->
+  <!-- CodeMirror 5 Base Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+
+  <!-- Language Modes -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/r/r.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/sql/sql.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/rust/rust.min.js"></script>
+
+  <!-- Application Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
